@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% load static %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <meta name="description" content="Oleg Shichelman OpenAi CNN" />
+    <meta name="keywords" content="Oleg Shichelman" />
+
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static "css/bootstrap.min.css" %}">
+    <link rel="stylesheet" href="{% static "css/owl.carousel.min.css" %}">
+    <link rel="stylesheet" href="{% static "css/owl.theme.default.min.css" %}">
+    <link rel="stylesheet" href="{% static "css/jquery.fancybox.min.css" %}">
+    <link rel="stylesheet" href="{% static "fonts/style.css" %}">
+    <link rel="stylesheet" href="{% static "fonts/flaticon.css" %}">
+    <link rel="stylesheet" href="{% static "css/aos.css" %}">
+    <link rel="stylesheet" href="{% static "css/style.css" %}">
+    <link rel="stylesheet" href="{% static "css/imageGen.css" %}">
+
+    <title>Oleg Shichelman OpenAi CNN</title>
+  </head>
+
+  <body data-spy="scroll" data-target=".site-navbar-target" data-offset="100">
+
+    <div class="site-mobile-menu site-navbar-target">
+      <div class="site-mobile-menu-header">
+        <div class="site-mobile-menu-close">
+          <span class="icofont-close js-menu-toggle"></span>
+        </div>
+      </div>
+      <div class="site-mobile-menu-body"></div>
+    </div>
+
+    <nav class="site-nav js-site-navbar mb-5 site-navbar-target">
+      <div class="container">
+        <div class="site-navigation text-center">
+          <a href="index.html" class="d-block text-center float-left logo">OS</a>
+          <ul class="js-clone-nav ml-0 pl-0 d-none d-lg-inline-block site-menu mx-auto text-center">
+            <li><a href="{% url "home" %}" class="nav-link">Home</a></li>
+          </ul>
+          <a href="#" class="burger ml-auto float-right site-menu-toggle js-menu-toggle d-inline-block light d-lg-none" data-toggle="collapse" data-target="#main-navbar">
+            <span></span>
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="site-blocks-cover overlay" style="background-image: url({% static "images/CNN.PNG" %});" data-aos="fade" data-stellar-background-ratio="0.5" id="home-section">
+      <div class="container">
+        <div class="row align-items-center justify-content-center text-center">
+
+          <div class="col-md-6 col-lg-4 text-center mb-5" data-aos="fade-up" data-aos-delay="100">
+            <div class="site-service-item" data-animate-effect="fadeIn">
+              <h3 class="mb-4">OpenAI To CNN</h3>
+              <p>The AI project allows users to describe a cat or a dog with specific characteristics, such as color, breed, and size.
+                Using OpenAI, we generate an image based on these characteristics and present it to the user.
+                We then feed this image into a convolutional neural network to detect whether it is a cat or a dog, and inform the user of the result.
+                Additionally, each generated image is saved to a database for future use in improving the model's accuracy. *** Under Construction ***
+              </p>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-lg-7">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="pet-generator">
+                <h2>Choose a pet:</h2>
+                <div class="pet-buttons">
+                  <button class="pet-button btn btn-dark" id="dog-button">Dog</button>
+                  <button class="pet-button btn btn-dark" id="cat-button">Cat</button>
+                </div>
+                <textarea id="pet-description" placeholder="Describe your pet..."></textarea>
+                <button class="generate-button btn btn-dark" id="generate-button">Generate</button>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="d-flex flex-row">
+                  <div id="pet-image-container" class="flex-grow-1"></div>
+                  <button class="try-cnn-button btn btn-primary ml-3" style="display: none;" id="try-cnn-button" onclick="tryCnn()">Let's Try Our CNN</button>
+                  <iframe id="try-cnn-iframe" style="display: none;"></iframe>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <form id="try-cnn-form" method="POST" action="{% url 'try_cnn' %}">
+      {% csrf_token %}
+      <input type="hidden" name="selected_pet" id="selected-pet">
+      <input type="hidden" name="image_path" id="image-path">
+    </form>
+
+
+
+    <div class="site-footer">
+
+      <div class="footer-dots"></div> <!-- /.footer-dots -->
+      <div class="container">
+        <div class="row mt-5">
+          <div class="col-12 text-center">
+            <p>Copyright &copy;<script>document.write(new Date().getFullYear());</script> Oleg Shichelman. All rights reserved</p>
+          </div>
+        </div>
+      </div> <!-- /.container -->
+    </div> <!-- /.site-footer -->
+
+    <div id="overlayer"></div>
+    <div class="loader">
+      <div class="spinner-border" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
+
+    <script src="{% static "js/jquery-3.4.1.min.js" %}"></script>
+    <script src="{% static "js/jquery-migrate-3.0.1.min.js" %}"></script>
+    <script src="{% static "js/popper.min.js" %}"></script>
+    <script src="{% static "js/bootstrap.min.js" %}"></script>
+    <script src="{% static "js/jquery.easing.1.3.js" %}"></script>
+    <script src="{% static "js/jquery.stellar.min.js" %}"></script>
+    <script src="{% static "js/jquery.waypoints.min.js" %}"></script>
+    <script src="{% static "js/isotope.pkgd.min.js" %}"></script>
+    <script src="{% static "js/jquery.fancybox.min.js" %}"></script>
+    <script src="{% static "js/aos.js" %}"></script>
+    <script src="{% static "js/imagesloaded.pkgd.js" %}"></script>
+    <script src="{% static "js/custom.js" %}"></script>
+    <script src="{% static "js/onClick.js" %}"></script>
+
+
+
+  </body>
+</html>
