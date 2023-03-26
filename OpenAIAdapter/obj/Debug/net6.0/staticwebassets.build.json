@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "Ka/ATK2fqIRbHwN81dLq4UZBz4gw0BFtZn4wOyralRM=",
+  "Source": "OpenAIAdapter",
+  "BasePath": "_content/OpenAIAdapter",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
